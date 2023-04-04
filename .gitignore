@@ -1,0 +1,10 @@
+# gitkeep
+!.gitkeep
+
+# Folders
+mysql/data/
+mysql/logs/
+prpnet-server/sievefiles/
+
+# Files
+.env
