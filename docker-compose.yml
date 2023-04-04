@@ -19,45 +19,26 @@ services:
     networks:
       - prpnet
 
-  laravel:
-    build:
-      context: './prpnet-laravel'
-    container_name: ${COMPOSE_PROJECT_NAME}_laravel
-    env_file:
-      - .env
-    volumes:
-      - ./prpnet-laravel:/var/www
-    ports:
-      - "9000:9000"
-    networks:
-      - prpnet
-
   server:
     build:
       context: './prpnet-server'
     container_name: ${COMPOSE_PROJECT_NAME}_server
     command: "/bin/sh -c ./prpserver"
+    environment:
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      PRPNET_HTML_TITLE: ${PRPNET_HTML_TITLE}
+      PRPNET_PROJECT_TITLE: ${PRPNET_PROJECT_TITLE}
+      PRPNET_SERVER_TYPE: ${PRPNET_SERVER_TYPE}
+      PRPNET_ADMIN_EMAIL: ${PRPNET_ADMIN_EMAIL}
+      PRPNET_ADMIN_PASSWORD: ${PRPNET_ADMIN_PASSWORD}
     volumes:
       - ./prpnet-server/sievefiles:/prpnet-server/sievefiles
-      - ./prpnet-server/database.ini:/prpnet-server/database.ini
-      - ./prpnet-server/prpserver.ini:/prpnet-server/prpserver.ini
-      - ./prpnet-server/prpserver.delay:/prpnet-server/prpserver.delay
     ports:
       - "7100:7100"
     depends_on:
       - mysql
-    networks:
-      - prpnet
-
-  nginx:
-    image: nginx:alpine
-    container_name: ${COMPOSE_PROJECT_NAME}_nginx
-    restart: unless-stopped
-    ports:
-      - "${STACK_EXTERNAL_PORT}:8080"
-    volumes:
-      - ./prpnet-laravel:/var/www
-      - ./prpnet-laravel/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       - prpnet
 
