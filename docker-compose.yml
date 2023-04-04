@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: ${COMPOSE_PROJECT_NAME}_mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
+    restart: unless-stopped
+    volumes:
+      - ./mysql/create_tables_mysql.sql:/docker-entrypoint-initdb.d/create_tables_mysql.sql
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/logs:/var/log/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - prpnet
+
+  laravel:
+    build:
+      context: './prpnet-laravel'
+    container_name: ${COMPOSE_PROJECT_NAME}_laravel
+    env_file:
+      - .env
+    volumes:
+      - ./prpnet-laravel:/var/www
+    ports:
+      - "9000:9000"
+    networks:
+      - prpnet
+
+  server:
+    build:
+      context: './prpnet-server'
+    container_name: ${COMPOSE_PROJECT_NAME}_server
+    command: "/bin/sh -c ./prpserver"
+    volumes:
+      - ./prpnet-server/sievefiles:/prpnet-server/sievefiles
+      - ./prpnet-server/database.ini:/prpnet-server/database.ini
+      - ./prpnet-server/prpserver.ini:/prpnet-server/prpserver.ini
+      - ./prpnet-server/prpserver.delay:/prpnet-server/prpserver.delay
+    ports:
+      - "7100:7100"
+    depends_on:
+      - mysql
+    networks:
+      - prpnet
+
+  nginx:
+    image: nginx:alpine
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
+    restart: unless-stopped
+    ports:
+      - "${STACK_EXTERNAL_PORT}:8080"
+    volumes:
+      - ./prpnet-laravel:/var/www
+      - ./prpnet-laravel/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - prpnet
+
+networks:
+  prpnet:
+    driver: bridge
