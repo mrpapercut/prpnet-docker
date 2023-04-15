@@ -11,9 +11,6 @@
         "resolveJsonModule": true,
         "typeRoots": [
             "./src/@types"
-        ],
-        "types": [
-            "node"
         ]
     },
     "include": [

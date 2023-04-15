@@ -27,6 +27,8 @@ COPY --chown=www:www . /var/www
 
 USER www
 
+RUN composer install
+
 EXPOSE 9000
 
 CMD ["php-fpm"]
