@@ -1,0 +1,23 @@
+@import 'fonts';
+@import 'colors';
+@import 'generic';
+@import 'pages/addrange';
+
+
+
+#header-links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 1rem;
+    border-bottom: 1px solid $hr;
+    text-align: center;
+}
+
+#header-links a {
+    color: $linkcolor;
+    text-decoration: none;
+}
+
+.statsTable {
+    margin: 0 auto;
+}

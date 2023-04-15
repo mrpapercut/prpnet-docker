@@ -1,0 +1,61 @@
+body {
+    background: $background;
+    color: $text;
+    font-family: 'Noto Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin: 1rem auto .5rem;
+    text-align: center;
+}
+
+.warning {
+    margin: 1rem auto;
+    text-align: center;
+    color: $warning;
+}
+
+.important {
+    font-weight: bold;
+    background: $important;
+}
+
+input[type=file] {
+    position: absolute;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+label, button {
+    border: 1px solid $inputborder;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background: transparent;
+    color: $text;
+    font-family: 'Noto Sans';
+    font-size: 1rem;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+}
+
+th, td {
+    padding: .25rem .5rem;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}
