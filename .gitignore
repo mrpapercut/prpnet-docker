@@ -4,7 +4,12 @@
 # Folders
 mysql/data/
 mysql/logs/
+
 prpnet-server/sievefiles/
+
+old/
+prpclient/
 
 # Files
 .env
+.env*
