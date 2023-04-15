@@ -8,7 +8,9 @@ services:
     env_file:
       - .env
     volumes:
-      - ./prpnet-laravel:/var/www
+      - ./prpnet-laravel/app:/var/www/app
+      - ./prpnet-laravel/public:/var/www/public
+      - ./prpnet-laravel/resources:/var/www/resources
     ports:
       - "9000:9000"
     networks:
