@@ -6,8 +6,8 @@ set -e
 envsubst < database.conf > database.ini
 envsubst < prpserver.conf > prpserver.ini
 
-# Wait for the backend to be up, if we know where it is.
-./waitforit.sh "mysql:3306"
+# Wait for mysql to be up
+./waitforit.sh -t 60 "mysql:3306"
 
 # Run the main container command.
 exec "$@"
