@@ -58,6 +58,7 @@ services:
       - ./laravel/app:/var/www/app
       - ./laravel/public:/var/www/public
       - ./laravel/resources:/var/www/resources
+      - ./laravel/storage/app/exports:/var/www/storage/app/exports
     ports:
       - "9000:9000"
     networks:
