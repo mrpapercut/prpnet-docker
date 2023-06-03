@@ -3,8 +3,6 @@
 @import 'generic';
 @import 'pages/addrange';
 
-
-
 #header-links {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -13,11 +11,71 @@
     text-align: center;
 }
 
-#header-links a {
-    color: $linkcolor;
-    text-decoration: none;
-}
-
 .statsTable {
     margin: 0 auto;
+    display: grid;
+    grid-gap: .25rem;
+    text-align: center;
+
+    div:not(.tableHeader) {
+        white-space: nowrap;
+    }
+
+    &.grid4 {
+        grid-template-columns: repeat(4, 1fr);
+
+        & > .gridwide {
+            grid-column-end: 5;
+        }
+    }
+
+    &.grid5 {
+        grid-template-columns: repeat(5, 1fr);
+
+        & > .gridwide {
+            grid-column-end: 6;
+        }
+    }
+
+    &.grid6 {
+        grid-template-columns: repeat(6, 1fr);
+
+        & > .gridwide {
+            grid-column-end: 7;
+        }
+    }
+
+    &.grid7 {
+        grid-template-columns: repeat(7, 1fr);
+
+        & > .gridwide {
+            grid-column-end: 8;
+        }
+    }
+
+    &.grid8 {
+        grid-template-columns: repeat(8, 1fr);
+
+        & > .gridwide {
+            grid-column-end: 9;
+        }
+    }
+
+    &.grid9 {
+        grid-template-columns: repeat(9, 1fr);
+
+        & > .gridwide {
+            grid-column-end: 10;
+        }
+    }
+
+    .gridwide {
+        grid-column-start: 1;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .tableHeader {
+        font-weight: bold;
+    }
 }

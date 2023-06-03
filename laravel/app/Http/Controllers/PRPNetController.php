@@ -182,12 +182,13 @@ class PRPNetController extends Controller
 
     private function getRecentResults() {
         $recentResults = CandidateTestResult::join('CandidateTest', 'CandidateTestResult.CandidateName', '=', 'CandidateTest.CandidateName')
-            ->orderByDesc('CandidateTestResult.TestID')->limit(20)->get();
+            ->join('Candidate', 'CandidateTest.CandidateName', '=', 'Candidate.CandidateName')
+            ->orderByDesc('CandidateTestResult.TestID')->limit(15)->get();
 
         foreach($recentResults as $recentResult) {
             switch ($recentResult->TestResult) {
                 case AppConstants::RESULT_COMPOSITE:
-                    $recentResult->TestResult = 'Composite';
+                    $recentResult->TestResult = 'C';
                     break;
 
                 case AppConstants::RESULT_PRP:
@@ -195,7 +196,7 @@ class PRPNetController extends Controller
                     break;
 
                 case AppConstants::RESULT_PRIME:
-                    $recentResult->TestResult = 'Prime';
+                    $recentResult->TestResult = 'P!';
                     break;
             }
         }

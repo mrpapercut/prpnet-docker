@@ -1,28 +1,22 @@
 @if(count($teamStats) == 0)
 <p id="team-stats-notice" class="warning">No team stats</p>
 @else
-<table class="statsTable" id="teamStats">
-<thead>
-<tr>
-    <th>Team</th>
-    <th>Total Score</th>
-    <th>Tests Performed</th>
-    <th>PRPs Found</th>
-    <th>Primes Found</th>
-    <th>GFN Divisors Found</th>
-</tr>
-</thead>
-<tbody>
+@php $showGFNDivisors = array_sum(array_map(function($teamStat) { return $teamStat['GFNDivisorsFound']; }, $teamStats->toArray())) > 0; @endphp
+<div class="statsTable {{ $showGFNDivisors ? 'grid6' : 'grid5' }}" id="teamStats">
+<div class="tableHeader">Team</div>
+<div class="tableHeader">Total Score</div>
+<div class="tableHeader">Tests Performed</div>
+<div class="tableHeader">PRPs Found</div>
+<div class="tableHeader">Primes Found</div>
+@if($showGFNDivisors) <div class="tableHeader">GFN Divisors Found</div> @endif
+
 @foreach($teamStats as $teamStat)
-<tr>
-    <td>{{ $teamStat->TeamID }}</td>
-    <td>{{ $teamStat->TotalScore }}</td>
-    <td>{{ $teamStat->TestsPerformed }}</td>
-    <td>{{ $teamStat->PRPsFound }}</td>
-    <td>{{ $teamStat->PrimesFound }}</td>
-    <td>{{ $teamStat->GFNDivisorsFound }}</td>
-</tr>
+    <div>{{ $teamStat->TeamID }}</div>
+    <div>{{ round($teamStat->TotalScore) }}</div>
+    <div>{{ $teamStat->TestsPerformed }}</div>
+    <div>{{ $teamStat->PRPsFound }}</div>
+    <div>{{ $teamStat->PrimesFound }}</div>
+    @if($showGFNDivisors) <div>{{ $teamStat->GFNDivisorsFound }}</div> @endif
 @endforeach
-</tbody>
-</table>
+</div>
 @endif

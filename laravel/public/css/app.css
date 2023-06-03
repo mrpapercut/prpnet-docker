@@ -1,0 +1,154 @@
+/* latin-ext */
+@font-face {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/NotoSansLatinExt.woff2?669c36ae7294210bcfd96736f031502b) format("woff2");
+  unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/NotoSansLatin.woff2?4ab367fa50b8efb5372909b72facce20) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+body {
+  background: #222;
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+h2 {
+  margin: 1rem auto 0.5rem;
+  text-align: center;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #fff;
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.warning {
+  margin: 1rem auto;
+  text-align: center;
+  color: orange;
+}
+
+.important {
+  font-weight: bold;
+  background: aquamarine;
+}
+
+input[type=file] {
+  position: absolute;
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+label, button {
+  display: inline-block;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background: transparent;
+  color: #fff;
+  font-family: "Noto Sans";
+  font-size: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
+
+th, td {
+  padding: 0.25rem 0.5rem;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+#header-links {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 1rem;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+}
+
+.statsTable {
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 0.25rem;
+  text-align: center;
+}
+.statsTable div:not(.tableHeader) {
+  white-space: nowrap;
+}
+.statsTable.grid4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.statsTable.grid4 > .gridwide {
+  grid-column-end: 5;
+}
+.statsTable.grid5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+.statsTable.grid5 > .gridwide {
+  grid-column-end: 6;
+}
+.statsTable.grid6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.statsTable.grid6 > .gridwide {
+  grid-column-end: 7;
+}
+.statsTable.grid7 {
+  grid-template-columns: repeat(7, 1fr);
+}
+.statsTable.grid7 > .gridwide {
+  grid-column-end: 8;
+}
+.statsTable.grid8 {
+  grid-template-columns: repeat(8, 1fr);
+}
+.statsTable.grid8 > .gridwide {
+  grid-column-end: 9;
+}
+.statsTable.grid9 {
+  grid-template-columns: repeat(9, 1fr);
+}
+.statsTable.grid9 > .gridwide {
+  grid-column-end: 10;
+}
+.statsTable .gridwide {
+  grid-column-start: 1;
+  text-align: center;
+  font-weight: bold;
+}
+.statsTable .tableHeader {
+  font-weight: bold;
+}

@@ -13,53 +13,29 @@ Estimate of {{ floor($hoursLeft / 24) }} days before the server runs out of work
 @endif
 </p>
 
-<table class="statsTable" id="serverStats">
-<thead>
-<tr>
-    <th>Form</th>
-    <th>Total Candidates</th>
-    <th>Min N</th>
-    <th>Max N</th>
-    <th>Count Tested</th>
-    <th>Count Untested</th>
-    <th>In Progress</th>
-    <th>Completed Thru</th>
-    <th>Leading Edge</th>
-    <th>Progress</th>
-    <th>PRPs/Primes</th>
-</tr>
-</thead>
-<tbody>
-@foreach($serverStats as $groupStats)
-<tr>
-    <td><a href="/admin/group/{{ urlencode($groupStats->groupform) }}">{{ $groupStats->groupform }}</a></td>
-    <td>{{ $groupStats->CountInGroup }}</td>
-    <td>{{ $groupStats->MinInGroup }}</td>
-    <td>{{ $groupStats->MaxInGroup }}</td>
-    <td>{{ $groupStats->CountTested }}</td>
-    <td>{{ $groupStats->CountUntested }}</td>
-    <td>{{ $groupStats->CountInProgress }}</td>
-    <td>{{ $groupStats->CompletedThru }}</td>
-    <td>{{ $groupStats->LeadingEdge }}</td>
-    <td>{{ round(($groupStats->CountTested / $groupStats->CountInGroup) * 100) }}%</td>
-    <td>{{ $groupStats->PRPandPrimesFound }}</td>
-</tr>
+<div class="statsTable grid5" id="serverStats">
+@foreach(['Form', /*'Total Candidates', 'Min N', 'Max N',*/ 'Tested / Untested / In Progress', /*'Completed Thru',*/ 'Leading Edge', 'Progress', 'PRPs/Primes'] as $header)
+<div class="tableHeader">{{ $header }}</div>
 @endforeach
-</tbody>
-<tfoot>
-<tr>
-    <th>Groups: {{ $totals['groups'] }}</th>
-    <th>{{ $totals['totalCandidates'] }}</th>
-    <th>{{ $totals['minN'] }}</th>
-    <th>{{ $totals['maxN'] }}</th>
-    <th>{{ $totals['countTested'] }}</th>
-    <th>{{ $totals['countUntested'] }}</th>
-    <th>{{ $totals['inProgress'] }}</th>
-    <th>{{ $totals['completedThru'] }}</th>
-    <th>{{ $totals['leadingEdge'] }}</th>
-    <td>{{ round(($totals['countTested'] / $totals['totalCandidates']) * 100) }}%</td>
-    <th>{{ $totals['prpsPrimes'] }}</th>
-</tr>
-</tfoot>
-</table>
+@foreach($serverStats as $groupStats)
+<div><a href="/admin/group/{{ urlencode($groupStats->groupform) }}">{{ $groupStats->groupform }}</a></div>
+<!-- <div>{{ $groupStats->CountInGroup }}</div>
+<div>{{ $groupStats->MinInGroup }}</div>
+<div>{{ $groupStats->MaxInGroup }}</div> -->
+<div>{{ $groupStats->CountTested }} / {{ $groupStats->CountUntested }} / {{ $groupStats->CountInProgress }}</div>
+<!-- <div>{{ $groupStats->CompletedThru }}</div> -->
+<div>{{ $groupStats->LeadingEdge }}</div>
+<div>{{ round(($groupStats->CountTested / $groupStats->CountInGroup) * 100) }}%</div>
+<div>{{ $groupStats->PRPandPrimesFound }}</div>
+@endforeach
+<div>Groups: {{ $totals['groups'] }}</div>
+<!-- <div>{{ $totals['totalCandidates'] }}</div>
+<div>{{ $totals['minN'] }}</div>
+<div>{{ $totals['maxN'] }}</div> -->
+<div>{{ $totals['countTested'] }} / {{ $totals['countUntested'] }} / {{ $totals['inProgress'] }}</div>
+<!-- <div>{{ $totals['completedThru'] }}</div> -->
+<div>{{ $totals['leadingEdge'] }}</div>
+<div>{{ round(($totals['countTested'] / $totals['totalCandidates']) * 100) }}%</div>
+<div>{{ $totals['prpsPrimes'] }}</div>
+</div>
 @endsection

@@ -21,17 +21,12 @@ use App\Http\Controllers\PRPNetController;
 // });
 
 Route::get('/', [PRPNetController::class, 'serverStats'])->name('serverStats');
-// Route::get('/server_stats', [PRPNetController::class, 'serverStats'])->name('serverStats');
 Route::get('/pending_tests', [PRPNetController::class, 'pendingTests'])->name('pendingTests');
-// Route::get('/user_stats', [PRPNetController::class, 'userStats'])->name('userStats');
-// Route::get('/user_primes', [PRPNetController::class, 'userPrimes'])->name('userPrimes');
-// Route::get('/team_stats', [PRPNetController::class, 'teamStats'])->name('teamStats');
-// Route::get('/team_primes', [PRPNetController::class, 'teamPrimes'])->name('teamPrimes');
-
 Route::get('/recent_results', [PRPNetController::class, 'recentResults'])->name('recentResults');
 Route::get('/stats', [PRPNetController::class, 'statistics'])->name('statistics');
 
 // Route::get('/admin/group/{form}', [AdminController::class, 'groupDetails'])->name('admin:groupDetails');
+Route::view('/admin', 'admin.index')->name('admin:index');
 Route::post('/admin/group/export', [AdminController::class, 'exportGroup'])->name('admin:exportGroup');
 Route::view('/admin/group/addrange', 'admin.addRange')->name('admin:addRangePage');
 Route::post('/admin/group/addrange', [AdminController::class, 'addRange'])->name('admin:addRange');

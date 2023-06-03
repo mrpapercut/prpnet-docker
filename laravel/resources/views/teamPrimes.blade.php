@@ -1,31 +1,19 @@
 @if(count($teamPrimes) == 0)
 <p id="team-primes-notice" class="warning">No team primes</p>
 @else
-<table class="statsTable" id="teamPrimes">
-<thead>
-<tr><th colspan="7">Primes and PRPs for Team {{ $teamPrimes[0]->TeamID }}</th></tr>
-<tr>
-    <th>Candidate</th>
-    <th>Prime/PRP</th>
-    <th>User</th>
-    <th>Machine</th>
-    <th>Instance</th>
-    <th>Date Reported</th>
-    <th>Decimal Length</th>
-</tr>
-</thead>
-<tbody>
-@foreach($teamPrimes as $teamPrime)
-<tr>
-    <td>{{ $teamPrime->CandidateName }}</td>
-    <td>{{ $teamPrime->TestResult == AppConstants::RESULT_PRIME ? 'Prime' : 'PRP' }}</td>
-    <td>{{ $teamPrime->UserID }}</td>
-    <td>{{ $teamPrime->MachineID }}</td>
-    <td>{{ $teamPrime->InstanceID }}</td>
-    <td>{{ date('Y-m-d H:i:s', $teamPrime->DateReported) }}</td>
-    <td>{{ $teamPrime->DecimalLength }}</td>
-</tr>
+<div class="statsTable grid5" id="teamPrimes">
+<div class="gridwide">Primes and PRPs for Team {{ $teamPrimes[0]->TeamID }}</div>
+@foreach(['Candidate', 'Prime/PRP', /*'User',*/ 'Machine', 'Date Reported', 'Decimal Length'] as $header)
+<div class="tableHeader">{{ $header }}</div>
 @endforeach
-</tbody>
-</table>
+
+@foreach($teamPrimes as $teamPrime)
+    <div>{{ $teamPrime->CandidateName }}</div>
+    <div>{{ $teamPrime->TestResult == AppConstants::RESULT_PRIME ? 'Prime' : 'PRP' }}</div>
+    <!-- <div>{{ $teamPrime->UserID }}</div> -->
+    <div>{{ $teamPrime->MachineID }} - {{ $teamPrime->InstanceID }}</div>
+    <div>{{ date('Y-m-d H:i:s', $teamPrime->DateReported) }}</div>
+    <div>{{ $teamPrime->DecimalLength }}</div>
+@endforeach
+</div>
 @endif

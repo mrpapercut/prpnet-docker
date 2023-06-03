@@ -5,35 +5,16 @@
 @if(count($recentResults) == 0)
 <p id="recent-results-notice" class="warning">No recent results</p>
 @else
-<table class="statsTable" id="recentResults">
-<thead>
-<tr>
-    <th>Candidate</th>
-    <th>Result</th>
-    {{--
-    <th>User</th>
-    <th>Machine</th>
-    <th>Instance</th>
-    <th>Team</th>
-    --}}
-    <th>Date Assigned</th>
-    <th>Total Time</th>
-</tr>
-</thead>
-<tbody>
+<div class="statsTable grid5" id="recentResults">
+@foreach(['Candidate', 'Result', 'Date', 'Total Time', 'Decminal Length'] as $header)
+<div class="tableHeader">{{ $header }}</div>
+@endforeach
 @foreach($recentResults as $recentResult)
-<tr>
-    <td>{{ $recentResult->CandidateName }}</td>
-    <td>{{ $recentResult->TestResult }}</td>
-    {{--
-    <td>{{ $recentResult->UserID }}</td>
-    <td>{{ $recentResult->MachineID }}</td>
-    <td>{{ $recentResult->InstanceID }}</td>
-    <td>{{ $recentResult->TeamID }}</td>
-    --}}
-    <td>{{ date('Y-m-d H:i:s', $recentResult->TestID) }}</td>
-    <td>{{ substr(DateTime::createFromFormat('U.u', $recentResult->SecondsForTest)->format('i:s.u'), 0, -3) }}</td>
-</tr>
+<div>{{ $recentResult->CandidateName }}</div>
+<div>{{ $recentResult->TestResult }}</div>
+<div>{{ date('H:i:s', $recentResult->TestID + 7200 + round($recentResult->SecondsForTest)) }}</div>
+<div>{{ DateTime::createFromFormat('U.u', $recentResult->SecondsForTest)->format('H:i:s') }}</div>
+<div>{{ $recentResult->DecimalLength }}</div>
 @endforeach
 @endif
 @endsection
